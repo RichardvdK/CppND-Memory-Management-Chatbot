@@ -30,8 +30,14 @@ public:
     //// STUDENT CODE
     ////
 
+    ChatBot(const ChatBot &source);            // copy constructor
+    ChatBot &operator=(const ChatBot &source); // copy assignment operator
+    ChatBot(ChatBot &&source);                 // move constructor
+    ChatBot &operator=(ChatBot &&source);      // move assignment operator
+
     ////
     //// EOF STUDENT CODE
+
 
     // getters / setters
     void SetCurrentNode(GraphNode *node);
