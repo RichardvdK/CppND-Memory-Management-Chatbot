@@ -12,7 +12,7 @@
 ChatBot::ChatBot()
 {
     // invalidate data handles
-    _image = nullptr;
+    _image = NULL;
     _chatLogic = nullptr;
     _rootNode = nullptr;
 }
@@ -66,7 +66,7 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
     if (this == &source)
         return *this;
 
-    // deallocate old heap memory
+    // deallocate heap memory
     if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
     {
         delete _image;
@@ -76,6 +76,7 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
     // copy data handles
     _image = new wxBitmap(*source._image);
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
 
@@ -90,11 +91,12 @@ ChatBot::ChatBot(ChatBot &&source)
     // move data handles
     _image = source._image;
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
 
     // reset source data handles
-    source._image = nullptr;
+    source._image = NULL;
     source._chatLogic = nullptr;
     source._currentNode = nullptr;
     source._rootNode = nullptr;
@@ -119,6 +121,7 @@ ChatBot &ChatBot::operator=(ChatBot &&source)
     _image = source._image;
     _currentNode = source._currentNode;
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     _rootNode = source._rootNode;
 
     // reset source data handles
